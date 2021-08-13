@@ -15,6 +15,24 @@ app.get('/', (req,res) => {
   })
 });
 
+app.get('/artists', async (req, res) => {
+  const artists = await prisma.artist.findMany()
+  res.json({
+    success: true,
+    payload: artists,
+    message: "Operation Successful",
+  })
+})
+
+app.use((req, res, next) => {
+    res.status(404);
+    return res.json({
+      success: false,
+      payload: null,
+      message: `API SAYS: Endpoint not found for path: ${req.path}`,
+    });
+  });
+
 app.listen(PORT, () => {
   console.log("Rest Api server: "+PORT)
 })
