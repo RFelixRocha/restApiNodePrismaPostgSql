@@ -7,6 +7,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3001;
 app.use(express.json())
 
+//Aviso de API em funcionamento
 app.get('/', (req,res) => {
   return res.status(200).json({
     success: true,
@@ -15,6 +16,7 @@ app.get('/', (req,res) => {
   })
 });
 
+//lListagem de playlist
 app.get('/playlist', async (req, res) => {
   const songs = await prisma.song.findMany({
       where: { released: true },
@@ -26,6 +28,7 @@ app.get('/playlist', async (req, res) => {
   })
 })
 
+//Busca um Song especifico
 app.get(`/song/:id`, async (req, res) => {
   const { id } = req.params
   const song = await prisma.song.findFirst({
@@ -37,6 +40,7 @@ app.get(`/song/:id`, async (req, res) => {
   })
 })
 
+//Cria um novo registro de Artist
 app.post(`/artist`, async (req, res) => {
   const result = await prisma.artist.create({
       data: { ...req.body },
@@ -47,6 +51,7 @@ app.post(`/artist`, async (req, res) => {
   })
 })
 
+//Cria um Song
 app.post(`/song`, async (req, res) => {
   const { title, content, singerEmail } = req.body
   const result = await prisma.song.create({
@@ -63,6 +68,7 @@ app.post(`/song`, async (req, res) => {
   })
 })
 
+//Habilita uma musica
 app.put('/song/release/:id', async (req, res) => {
   const { id } = req.params
   const song = await prisma.song.update({
@@ -75,6 +81,7 @@ app.put('/song/release/:id', async (req, res) => {
   })
 })
 
+//Deleta uma música
 app.delete(`/song/:id`, async (req, res) => {
   const { id } = req.params
   const song = await prisma.song.delete({
@@ -86,6 +93,7 @@ app.delete(`/song/:id`, async (req, res) => {
   })
 })
 
+// Listas os artistas
 app.get('/artists', async (req, res) => {
   const artists = await prisma.artist.findMany()
   res.json({
@@ -94,6 +102,7 @@ app.get('/artists', async (req, res) => {
   })
 })
 
+//Aviso de rota não encontrada
 app.use((req, res, next) => {
   res.status(404);
   return res.json({
