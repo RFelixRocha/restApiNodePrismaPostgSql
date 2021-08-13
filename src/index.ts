@@ -99,7 +99,7 @@ app.use((req, res, next) => {
   return res.json({
       success: false,
       payload: null,
-      message: `API SAYS: Endpoint not found for path: ${req.path}`,
+      message: `API SAYS: Endpoint não encontrado para o caminho: ${req.path}`,
   });
 });
 
