@@ -1,8 +1,8 @@
 -- CreateTable
 CREATE TABLE "Artist" (
     "id" SERIAL NOT NULL,
-    "emai" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "name" TEXT,
 
     PRIMARY KEY ("id")
 );
@@ -19,7 +19,7 @@ CREATE TABLE "Song" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Artist.emai_unique" ON "Artist"("emai");
+CREATE UNIQUE INDEX "Artist.email_unique" ON "Artist"("email");
 
 -- AddForeignKey
 ALTER TABLE "Song" ADD FOREIGN KEY ("singerId") REFERENCES "Artist"("id") ON DELETE SET NULL ON UPDATE CASCADE;
