@@ -1,13 +1,15 @@
-import { PrismaClient } from ".prisma/client";
+import { PrismaClient } from '.prisma/client'
+
 const prisma = new PrismaClient()
+
 async function main() {
   const newArtist = await prisma.artist.create({
     data: {
-      name: 'Osinachi Kalu',
-      email: 'sinach@sinachmusic.com',
+      name: 'Gustavo Lima',
+      email: 'gmail@gmail.com',
       songs: {
         create: {
-          title: 'I Know Who I Am',
+          title: 'Balada boa',
         },
       },
     },
@@ -22,5 +24,5 @@ async function main() {
 }
 
 main()
-      .catch( (e) => console.log(e))
-      .finally( async() => await prisma.$disconnect())
+  .catch((e) => console.error(e))
+  .finally(async () => await prisma.$disconnect())
